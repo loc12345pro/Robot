@@ -42,3 +42,17 @@ Network Trash Folder
 Temporary Items
 .apdisk
 Robot.uvgui.tthieu2102
+*.crf
+*.d
+*.o
+*.axf
+*.hex
+*.htm
+*.lnp
+*.dep
+Robot.uvopt
+*.map
+*.lst
+*.lst
+startup_stm32f4xx.lst
+*.lst
