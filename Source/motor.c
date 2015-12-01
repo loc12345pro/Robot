@@ -105,7 +105,6 @@ void Motor_SetDirection(motor_t* p_motor, motor_direction_e direction)
 }
 
 
-//22-11-2015 @Hieu
 /*
  * Name: Motor_SetSpeedLevel
  * Module: Motor
@@ -122,7 +121,6 @@ void Motor_SetSpeed(motor_t* p_motor, float speed)
     }
 }
 
-//24-11-2015 @Hieu
 /*
  * Name: Motor_ChangeSpeed
  * Module: Motor

@@ -25,13 +25,10 @@
 int main(void)
 {
     // Preparations
-    GPIO_InitTypeDef gpio_init;
-    keyboard_t keyboard;
     robot_t robot;
-    uint16_t command = 0;
+    robot_direction_e command = RobotBrake;
     
     memset(&robot, 0, sizeof(robot_t));
-    memset(&keyboard, 0, sizeof(keyboard_t));
     
     // System clock initialization
     SysClock_Init();
@@ -40,32 +37,10 @@ int main(void)
     
     Robot_Init(&robot);
     
-    // Keyboard initialization
-    Keyboard_Configure(&keyboard);
-    
-    //-----------------------------------
-            // Preparations
-        
-        GPIO_StructInit(&gpio_init);
-        
-        // Enable clock 
-        GPIO_EnableClock(GPIOD);
-        
-        // Initialize GPIO
-        gpio_init.GPIO_Mode = GPIO_Mode_OUT;
-        gpio_init.GPIO_OType = GPIO_OType_PP;
-        gpio_init.GPIO_Pin = GPIO_Pin_12;
-        gpio_init.GPIO_PuPd = GPIO_PuPd_UP;
-        gpio_init.GPIO_Speed = GPIO_Speed_50MHz;
-        
-        GPIO_Init(GPIOD, &gpio_init);
-        GPIOD->ODR = 1 << GPIO_Pin_12;
-    //-----------------------------------
-    
     for (; ; )
     {
         // Listen for receiving command
-        command = USART_MyReceiveData(robot.uart_receiver.usart_type);
+        command = (robot_direction_e)(USART_MyReceiveData(robot.uart_receiver.usart_type));
         
         // Check command
         if ((command == RobotForward) || (command == RobotForwardLeft) || (command == RobotForwardRight)
@@ -139,8 +114,6 @@ void OnOffButton_Configure(button_t* p_button)
         p_button->button = BUTTON_USER;
     }
 }
-
-
 
 void Keyboard_Configure(keyboard_t* p_keyboard)
 {

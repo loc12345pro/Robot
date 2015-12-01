@@ -163,32 +163,46 @@ void Robot_SetDirection(robot_t* p_robot, robot_direction_e direction)
         switch (direction)
         {
             case RobotBrake:
+                Motor_SetSpeed(&(p_robot->motor_left), ROBOT_MIN_SPEED);
+                Motor_SetSpeed(&(p_robot->motor_right), ROBOT_MIN_SPEED);
                 Motor_SetDirection(&(p_robot->motor_left), MotorBrake);
                 Motor_SetDirection(&(p_robot->motor_right), MotorBrake);
                 break;
             case RobotForward:
+                Motor_SetSpeed(&(p_robot->motor_left), (p_robot->speed) * ROBOT_LEFT_SPEED_RATIO);
+                Motor_SetSpeed(&(p_robot->motor_right), (p_robot->speed) * ROBOT_RIGHT_SPEED_RATIO);
                 Motor_SetDirection(&(p_robot->motor_left), MotorForward);
                 Motor_SetDirection(&(p_robot->motor_right), MotorForward);
                 break;
             case RobotBackward:
+                Motor_SetSpeed(&(p_robot->motor_left), (p_robot->speed)* ROBOT_LEFT_SPEED_RATIO);
+                Motor_SetSpeed(&(p_robot->motor_right), (p_robot->speed)* ROBOT_RIGHT_SPEED_RATIO);
                 Motor_SetDirection(&(p_robot->motor_left), MotorBackward);
                 Motor_SetDirection(&(p_robot->motor_right), MotorBackward);                
                 break;
             case RobotForwardLeft:
-                Motor_SetDirection(&(p_robot->motor_left), MotorBrake);
+                Motor_SetSpeed(&(p_robot->motor_left), (p_robot->speed) * ROBOT_LEFT_SPEED_RATIO * ROBOT_TURNING_RATIO);
+                Motor_SetSpeed(&(p_robot->motor_right), (p_robot->speed)* ROBOT_RIGHT_SPEED_RATIO);
+                Motor_SetDirection(&(p_robot->motor_left), MotorForward);
                 Motor_SetDirection(&(p_robot->motor_right), MotorForward);                
                 break;
             case RobotForwardRight:
-                Motor_SetDirection(&(p_robot->motor_left), MotorForward);
-                Motor_SetDirection(&(p_robot->motor_right), MotorBrake);
+                Motor_SetSpeed(&(p_robot->motor_left), (p_robot->speed)* ROBOT_LEFT_SPEED_RATIO);
+                Motor_SetSpeed(&(p_robot->motor_right), (p_robot->speed) * ROBOT_RIGHT_SPEED_RATIO * ROBOT_TURNING_RATIO);
+                Motor_SetDirection(&(p_robot->motor_left), MotorForward);  
+                Motor_SetDirection(&(p_robot->motor_right), MotorForward);
                 break;
             case RobotBackwardLeft:
-                Motor_SetDirection(&(p_robot->motor_left), MotorBrake);
+                Motor_SetSpeed(&(p_robot->motor_left), (p_robot->speed) * ROBOT_LEFT_SPEED_RATIO * ROBOT_TURNING_RATIO);
+                Motor_SetSpeed(&(p_robot->motor_right), (p_robot->speed)* ROBOT_RIGHT_SPEED_RATIO);
+                Motor_SetDirection(&(p_robot->motor_left), MotorBackward);
                 Motor_SetDirection(&(p_robot->motor_right), MotorBackward);                
                 break;
             case RobotBackwardRight:
+                Motor_SetSpeed(&(p_robot->motor_left), (p_robot->speed) * ROBOT_LEFT_SPEED_RATIO);
+                Motor_SetSpeed(&(p_robot->motor_right), (p_robot->speed) * ROBOT_RIGHT_SPEED_RATIO * ROBOT_TURNING_RATIO);
                 Motor_SetDirection(&(p_robot->motor_left), MotorBackward);
-                Motor_SetDirection(&(p_robot->motor_right), MotorBrake);
+                Motor_SetDirection(&(p_robot->motor_right), MotorBackward);
                 break;
             case RobotUnknown:
                 // Do nothing
@@ -200,7 +214,6 @@ void Robot_SetDirection(robot_t* p_robot, robot_direction_e direction)
     }
 }
 
-//22-11-2015 @Hieu
 /*
  * Name: Robot_SetSpeed
  * Module: Motor
@@ -218,7 +231,6 @@ void Robot_SetSpeed(robot_t* p_robot, float speed)
     }
 }
 
-//22-11-2015 @Hieu
 /*
  * Name: Robot_ChangeSpeed
  * Module: Motor
@@ -234,16 +246,16 @@ void Robot_ChangeSpeed(robot_t* p_robot, uint8_t increase)
         {
             p_robot->speed += ROBOT_SPEED_CHANGE_INTERVAL;
             
-            Motor_SetSpeed(&(p_robot->motor_left), p_robot->speed);
-            Motor_SetSpeed(&(p_robot->motor_right), p_robot->speed);
+            Motor_ChangeSpeed(&(p_robot->motor_left), increase);
+            Motor_ChangeSpeed(&(p_robot->motor_right), increase);
             
         }
         else if ((p_robot->speed - ROBOT_SPEED_CHANGE_INTERVAL) >= ROBOT_MIN_SPEED)
         {
             p_robot->speed -= ROBOT_SPEED_CHANGE_INTERVAL;
                         
-            Motor_SetSpeed(&(p_robot->motor_left), p_robot->speed);
-            Motor_SetSpeed(&(p_robot->motor_right), p_robot->speed);
+            Motor_ChangeSpeed(&(p_robot->motor_left), increase);
+            Motor_ChangeSpeed(&(p_robot->motor_right), increase);
         }
     }
 }

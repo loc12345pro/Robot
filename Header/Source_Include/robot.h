@@ -4,7 +4,7 @@
  * Description: This file contains function prototypes concerned with controlling robot
  */
 
- /* NOTE: IN THIS VERSION, WE WILL IGNORE SPEED OF MOTOR DUE TO LACK OF KNOWLEDGE ABOUT CREATING PWM SIGNAL */
+ 
 
 #ifndef _ROBOT_H
 #define _ROBOT_H
@@ -14,6 +14,9 @@
 #define ROBOT_MAX_SPEED             90
 #define ROBOT_MIN_SPEED             0
 #define ROBOT_SPEED_CHANGE_INTERVAL 10
+#define ROBOT_LEFT_SPEED_RATIO      0.81f
+#define ROBOT_RIGHT_SPEED_RATIO     1.0f
+#define ROBOT_TURNING_RATIO         0.2f
 
 // ROBOT's MOTOR CONFIGURATIONS
 #define MOTOR_PORT GPIOE
@@ -39,7 +42,7 @@
 #define USART_TX GPIO_Pin_5
 #define USART_RX GPIO_Pin_6
 
-#define USART_BAUD_RATE 38400u
+#define USART_BAUD_RATE 19200u
 #define USART_HARDWARE_FLOW_CONTROL USART_HardwareFlowControl_None
 #define USART_MODE (USART_Mode_Tx | USART_Mode_Rx)
 #define USART_PARITY USART_Parity_No
@@ -133,7 +136,6 @@ robot_direction_e Robot_GetDirection(robot_t* p_robot);
  */
 void Robot_SetDirection(robot_t* p_robot, robot_direction_e direction);
 
-//22-11-2015 @Hieu
 /*
  * Name: Robot_SetSpeed
  * Module: Motor
@@ -143,7 +145,6 @@ void Robot_SetDirection(robot_t* p_robot, robot_direction_e direction);
  */
 void Robot_SetSpeed(robot_t* p_robot, float speed);
 
-//22-11-2015 @Hieu
 /*
  * Name: Robot_ChangeSpeed
  * Module: Motor
