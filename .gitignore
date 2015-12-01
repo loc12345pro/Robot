@@ -56,3 +56,4 @@ Robot.uvopt
 *.lst
 startup_stm32f4xx.lst
 *.lst
+*.lst
