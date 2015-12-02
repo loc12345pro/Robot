@@ -41,7 +41,7 @@ int main(void)
     {
         // Listen for receiving command
         command = (robot_direction_e)(USART_MyReceiveData(robot.uart_receiver.usart_type));
-        
+                
         // Check command
         if ((command == RobotForward) || (command == RobotForwardLeft) || (command == RobotForwardRight)
             || (command == RobotBackward) || (command == RobotBackwardLeft) || (command == RobotBackwardRight)

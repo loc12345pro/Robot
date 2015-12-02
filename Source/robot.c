@@ -88,8 +88,9 @@ void Robot_Move(robot_t* p_robot, robot_direction_e direction)
     {
         Robot_SetDirection(p_robot, direction);
         
-        Motor_Move(&(p_robot->motor_left));
         Motor_Move(&(p_robot->motor_right));
+        Motor_Move(&(p_robot->motor_left));
+        
     }
 }
 

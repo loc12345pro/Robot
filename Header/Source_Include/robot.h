@@ -14,27 +14,29 @@
 #define ROBOT_MAX_SPEED             90
 #define ROBOT_MIN_SPEED             0
 #define ROBOT_SPEED_CHANGE_INTERVAL 10
-#define ROBOT_LEFT_SPEED_RATIO      0.81f
+#define ROBOT_LEFT_SPEED_RATIO      0.75f
 #define ROBOT_RIGHT_SPEED_RATIO     1.0f
-#define ROBOT_TURNING_RATIO         0.2f
+#define ROBOT_TURNING_RATIO         0
 
 // ROBOT's MOTOR CONFIGURATIONS
 #define MOTOR_PORT GPIOE
-// Motor RIGHT
-#define MOTOR_RIGHT_OUT_1           GPIO_Pin_2
-#define MOTOR_RIGHT_OUT_2           GPIO_Pin_3
-#define MOTOR_RIGHT_TIM             TIM4        //
-#define MOTOR_RIGHT_TIM_FREQUENCY   50        //
-#define MOTOR_RIGHT_PWM_CHANNEL     TM_PWM_Channel_3        //
-#define MOTOR_RIGHT_PWM_PINPACK     TM_PWM_PinsPack_1
-// Motor LEFT
-#define MOTOR_LEFT_OUT_1            GPIO_Pin_4
-#define MOTOR_LEFT_OUT_2            GPIO_Pin_5
-#define MOTOR_LEFT_TIM              TIM2
-#define MOTOR_LEFT_TIM_FREQUENCY    50        //
-#define MOTOR_LEFT_PWM_CHANNEL      TM_PWM_Channel_3
-#define MOTOR_LEFT_PWM_PINPACK      TM_PWM_PinsPack_1
 #define MOTOR_SPEED 255
+
+// Motor LEFT
+#define MOTOR_LEFT_OUT_1            GPIO_Pin_4         //control bit 1
+#define MOTOR_LEFT_OUT_2            GPIO_Pin_5         //control bit 2
+#define MOTOR_LEFT_TIM              TIM2               //Timer
+#define MOTOR_LEFT_TIM_FREQUENCY    50                 //Timer Frequency
+#define MOTOR_LEFT_PWM_CHANNEL      TM_PWM_Channel_3   //PWM Channel
+#define MOTOR_LEFT_PWM_PINPACK      TM_PWM_PinsPack_1  //PWM Pinpack
+// Motor RIGHT
+#define MOTOR_RIGHT_OUT_1           GPIO_Pin_2         //control bit 1
+#define MOTOR_RIGHT_OUT_2           GPIO_Pin_3         //control bit 2
+#define MOTOR_RIGHT_TIM             TIM4               //Timer
+#define MOTOR_RIGHT_TIM_FREQUENCY   50                 //Timer Frequency
+#define MOTOR_RIGHT_PWM_CHANNEL     TM_PWM_Channel_3   //PWM Channel
+#define MOTOR_RIGHT_PWM_PINPACK     TM_PWM_PinsPack_1  //PWM Pinpack
+
 
 // ROBOT's USART CONTROLLER CONFIGURATIONS
 #define USART_PORT GPIOD
@@ -42,7 +44,7 @@
 #define USART_TX GPIO_Pin_5
 #define USART_RX GPIO_Pin_6
 
-#define USART_BAUD_RATE 19200u
+#define USART_BAUD_RATE 38400u
 #define USART_HARDWARE_FLOW_CONTROL USART_HardwareFlowControl_None
 #define USART_MODE (USART_Mode_Tx | USART_Mode_Rx)
 #define USART_PARITY USART_Parity_No
